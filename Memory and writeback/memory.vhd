@@ -64,6 +64,7 @@ architecture bahvioure of memory is
 
     signal memoryAddress, memoryOutput: std_logic_vector(31 downto 0);
     signal sel: std_logic_vector(1 downto 0);
+    signal load: std_logic;
 
     signal Reg1output, Reg2output: std_logic_vector(31 downto 0);
     
@@ -88,7 +89,8 @@ begin
     sel <= reset & selectors(3);
     MJ: entity work.mux4 port map (Reg2, "00000000000000000000000000000010", "00000000000000000000000000000000", "00000000000000000000000000000000", sel, memoryAddress);
 
-    memory: entity work.ram port map (clk, wb(3), loadPop, memoryAddress, Reg1, memoryOutput);
+    load <= 1 when opcode = "10001" or opcode = "10011" or opcode = "11011" or opcode = "11100";
+    memory: entity work.ram port map (clk, wb(3), load, memoryAddress, Reg1, memoryOutput);
 
     MH: entity work.mux4 port map (Reg1, memoryOutput, Reg4, "00000000000000000000000000000000", selectors(2 downto 1), Reg1output);
 
