@@ -1,0 +1,222 @@
+m255
+K4
+z2
+!s11e vcom 2019.2 2019.04, Apr 17 2019
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/intelFPGA_pro/19.3
+Ememory
+Z0 w1589012848
+Z1 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z3 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+Z4 dC:/Users/Eng.Mouhammed-Khier/Desktop/arch/Memory and writeback
+Z5 8C:/Users/Eng.Mouhammed-Khier/Desktop/arch/Memory and writeback/memory.vhd
+Z6 FC:/Users/Eng.Mouhammed-Khier/Desktop/arch/Memory and writeback/memory.vhd
+l0
+L48
+VW^1^;116QHm4RBWik_dRb0
+!s100 ^ceih@oo>Z=N;kM`QFj1<0
+Z7 OV;C;2019.2;69
+32
+Z8 !s110 1589012936
+!i10b 1
+Z9 !s108 1589012936.000000
+Z10 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Eng.Mouhammed-Khier/Desktop/arch/Memory and writeback/memory.vhd|
+Z11 !s107 C:/Users/Eng.Mouhammed-Khier/Desktop/arch/Memory and writeback/memory.vhd|
+!i113 1
+Z12 o-work work -2002 -explicit
+Z13 tExplicit 1 CvgOpt 0
+Abahvioure
+Z14 DEx4 work 4 mux2 0 22 o2<O`Dfm2l7RjUh9b5;ZB2
+Z15 DPx4 ieee 16 std_logic_textio 0 22 V5TSK`;aJKC<l]CEg1>mz1
+Z16 DEx4 work 3 ram 0 22 J0X9Ze;DFomm17oC_V^[R1
+Z17 DEx4 work 4 mux4 0 22 4d8LVF967ZCTkCOCRFom52
+R1
+R2
+R3
+DEx4 work 6 memory 0 22 W^1^;116QHm4RBWik_dRb0
+l69
+L57
+VdD9PFCLbUVeV_PXNcSmMU1
+!s100 ]6jRMIUoHEaK;m:I1<e>@1
+R7
+32
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Emux2
+R0
+R1
+R2
+R3
+R4
+R5
+R6
+l0
+L5
+Vo2<O`Dfm2l7RjUh9b5;ZB2
+!s100 MJ@nlZ:KOFik@;@j2]fZ`2
+R7
+32
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Abahvioure
+R1
+R2
+R3
+R14
+l14
+L13
+VdaX@jWRaTORY=T>DGDa[C3
+!s100 0Zj?kc^Dcm27I6:im<9[^2
+R7
+32
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Emux4
+R0
+R1
+R2
+R3
+R4
+R5
+R6
+l0
+L25
+V4d8LVF967ZCTkCOCRFom52
+!s100 _JI6[C>ON9H35P7=MNRh:0
+R7
+32
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Abahvioure
+R1
+R2
+R3
+R17
+l35
+L34
+V8zA_DXlGgI9j2F=GX51i[1
+!s100 2Nk]3zU7;<`^Q?@0ddMUQ2
+R7
+32
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Eram
+Z18 w1589001363
+R15
+R1
+R2
+R3
+R4
+Z19 8C:/Users/Eng.Mouhammed-Khier/Desktop/arch/Memory and writeback/ram.vhd
+Z20 FC:/Users/Eng.Mouhammed-Khier/Desktop/arch/Memory and writeback/ram.vhd
+l0
+L7
+VJ0X9Ze;DFomm17oC_V^[R1
+!s100 _IJPe?i0DgWND<U?zT8RU1
+R7
+32
+Z21 !s110 1589002184
+!i10b 1
+Z22 !s108 1589002184.000000
+Z23 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Eng.Mouhammed-Khier/Desktop/arch/Memory and writeback/ram.vhd|
+Z24 !s107 C:/Users/Eng.Mouhammed-Khier/Desktop/arch/Memory and writeback/ram.vhd|
+!i113 1
+R12
+R13
+Asyncram
+R15
+R1
+R2
+R3
+R16
+l33
+L17
+V?5j6`ANTTYl]9f^1@KCA21
+!s100 6MnX8^Hlgm`j[=_>fCz_X0
+R7
+32
+R21
+!i10b 1
+R22
+R23
+R24
+!i113 1
+R12
+R13
+Ewriteback
+Z25 w1589015009
+R1
+R2
+R3
+R4
+Z26 8C:/Users/Eng.Mouhammed-Khier/Desktop/arch/Memory and writeback/writeBack.vhd
+Z27 FC:/Users/Eng.Mouhammed-Khier/Desktop/arch/Memory and writeback/writeBack.vhd
+l0
+L6
+VaCj7d^XX]o8Hh0i21:Tkc2
+!s100 9K^<[QJ^N@IKgI23jedf:3
+R7
+32
+Z28 !s110 1589015024
+!i10b 1
+Z29 !s108 1589015024.000000
+Z30 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Eng.Mouhammed-Khier/Desktop/arch/Memory and writeback/writeBack.vhd|
+Z31 !s107 C:/Users/Eng.Mouhammed-Khier/Desktop/arch/Memory and writeback/writeBack.vhd|
+!i113 1
+R12
+R13
+Aarch
+R1
+R2
+R3
+Z32 DEx4 work 9 writeback 0 22 aCj7d^XX]o8Hh0i21:Tkc2
+l22
+L16
+Z33 V^EG8>M1=T;d3igNIdK:4f1
+Z34 !s100 0jSfOAO;DJn<C6HXXk3L=1
+R7
+32
+R28
+!i10b 1
+R29
+R30
+R31
+!i113 1
+R12
+R13
