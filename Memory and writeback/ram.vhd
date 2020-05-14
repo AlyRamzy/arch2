@@ -4,7 +4,7 @@ USE IEEE.numeric_std.all;
 use std.textio.all;
 use ieee.std_logic_textio.all;
 
-ENTITY ram IS
+ENTITY ram2 IS
 	PORT(
 		clk : IN std_logic;
 		wr  : IN std_logic;
@@ -12,9 +12,9 @@ ENTITY ram IS
 		address : IN  std_logic_vector(31 DOWNTO 0);
 		datain  : IN  std_logic_vector(31 DOWNTO 0);
 		dataout : OUT std_logic_vector(31 DOWNTO 0));
-END ENTITY ram;
+END ENTITY ram2;
 
-ARCHITECTURE syncram OF ram IS
+ARCHITECTURE syncram OF ram2 IS
 	TYPE ram_type IS ARRAY(0 TO 4095) OF std_logic_vector(31 DOWNTO 0);
 	
 	impure function InitRamFromFile (RamFileName : in string) return ram_type is
@@ -29,7 +29,7 @@ ARCHITECTURE syncram OF ram IS
 		return RAM;
 	END function;
 
-	SIGNAL ram : ram_type := InitRamFromFile("memory.txt");
+	SIGNAL ram : ram_type := InitRamFromFile("memory2.txt");
 	BEGIN
 		PROCESS(clk) IS
 			BEGIN

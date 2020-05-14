@@ -4,27 +4,29 @@ USE IEEE.numeric_std.all;
 use std.textio.all;
 use ieee.std_logic_textio.all;
 
-ENTITY ram2 IS
+ENTITY ram IS
 	PORT(
 		clk : IN std_logic;
 		wr  : IN std_logic;
 		rd	: IN std_logic;
 		address : IN  std_logic_vector(31 DOWNTO 0);
-		datain  : IN  std_logic_vector(31 DOWNTO 0);
-		dataout : OUT std_logic_vector(31 DOWNTO 0));
-END ENTITY ram2;
+		datain  : IN  std_logic_vector(15 DOWNTO 0);
+		dataout : OUT std_logic_vector(15 DOWNTO 0));
+END ENTITY ram;
 
-ARCHITECTURE syncram OF ram2 IS
-	TYPE ram_type IS ARRAY(0 TO 4095) OF std_logic_vector(31 DOWNTO 0);
-	
+ARCHITECTURE syncram OF ram IS
+	TYPE ram_type IS ARRAY(0 TO 4095) OF std_logic_vector(15 DOWNTO 0);
 	impure function InitRamFromFile (RamFileName : in string) return ram_type is
 		FILE RamFile : text is in RamFileName;
 		variable RamFileLine : line;
 		variable RAM : ram_type;
 		BEGIN
 			for I in ram_type'range loop
-				readline (RamFile, RamFileLine);
-				read (RamFileLine, RAM(I));
+				if(not endfile(RamFile)) then
+					readline (RamFile, RamFileLine);
+					read (RamFileLine, RAM(I));
+				else exit;
+				end if;
 			end loop;
 		return RAM;
 	END function;
@@ -32,6 +34,7 @@ ARCHITECTURE syncram OF ram2 IS
 	SIGNAL ram : ram_type := InitRamFromFile("memory.txt");
 	BEGIN
 		PROCESS(clk) IS
+			
 			BEGIN
 				IF rising_edge(clk) THEN  
 					IF wr = '1' THEN

@@ -1,0 +1,138 @@
+C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/firstmerge/reg.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/firstmerge/reg.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2019.2 Compiler 2019.04 Apr 17 2019
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity reg2
+-- Compiling architecture regarc of reg2
+
+} {} {}} C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/Decoder/DecodeReg.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/Decoder/DecodeReg.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2019.2 Compiler 2019.04 Apr 17 2019
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity reg
+-- Compiling architecture regarc of reg
+
+} {} {}} C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/fetch/fetch_main.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/fetch/fetch_main.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2019.2 Compiler 2019.04 Apr 17 2019
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity fetch
+-- Compiling architecture behavioral of fetch
+
+} {} {}} {C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/Memory and writeback/memory.vhd} {1 {vcom -work work -2002 -explicit -stats=none {C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/Memory and writeback/memory.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 2019.2 Compiler 2019.04 Apr 17 2019
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity mux2
+-- Compiling architecture bahvioure of mux2
+-- Compiling entity mux4
+-- Compiling architecture bahvioure of mux4
+-- Compiling entity memory
+-- Compiling architecture bahvioure of memory
+-- Loading entity mux4
+-- Loading package std_logic_textio
+-- Loading entity ram2
+-- Loading entity mux2
+
+} {} {}} C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/Decoder/Decode.vhd {2 {vcom -work work -2002 -explicit -stats=none C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/Decoder/Decode.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2019.2 Compiler 2019.04 Apr 17 2019
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity decode
+-- Compiling architecture decodeArch of decode
+** Warning: C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/Decoder/Decode.vhd(112): (vcom-1014) Array type case expression must be of a locally static subtype.
+** Warning: C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/Decoder/Decode.vhd(299): (vcom-1014) Array type case expression must be of a locally static subtype.
+-- Loading entity reg
+
+} {} {}} C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/fetch/ram.vhd {2 {vcom -work work -2002 -explicit -stats=none C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/fetch/ram.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2019.2 Compiler 2019.04 Apr 17 2019
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package std_logic_textio
+-- Compiling entity ram
+-- Compiling architecture syncram of ram
+** Warning: C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/fetch/ram.vhd(20): (vcom-1194) FILE declaration was written using VHDL 1987 syntax.
+
+} {} {}} C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/execution/execute_main.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/execution/execute_main.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2019.2 Compiler 2019.04 Apr 17 2019
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Compiling entity execute
+-- Compiling architecture execute_arch of execute
+
+} {} {}} {C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/Memory and writeback/writeBack.vhd} {1 {vcom -work work -2002 -explicit -stats=none {C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/Memory and writeback/writeBack.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 2019.2 Compiler 2019.04 Apr 17 2019
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity writeBack
+-- Compiling architecture arch of writeBack
+
+} {} {}} C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/firstmerge/main.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/firstmerge/main.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2019.2 Compiler 2019.04 Apr 17 2019
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity main
+-- Compiling architecture behavioure of main
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading entity fetch
+-- Loading entity reg2
+-- Loading entity decode
+-- Loading entity execute
+-- Loading entity memory
+-- Loading entity writeBack
+
+} {} {}} C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/execution/ALU.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/execution/ALU.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2019.2 Compiler 2019.04 Apr 17 2019
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity ALU
+-- Compiling architecture ALU_arch of ALU
+
+} {} {}} C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/fetch/fetch_decode.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/fetch/fetch_decode.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2019.2 Compiler 2019.04 Apr 17 2019
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity fetch_decode
+-- Compiling architecture behavioral of fetch_decode
+
+} {} {}} C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/fetch/fetch_status.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/fetch/fetch_status.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2019.2 Compiler 2019.04 Apr 17 2019
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity fetch_status
+-- Compiling architecture fsm of fetch_status
+
+} {} {}} {C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/Memory and writeback/ram.vhd} {2 {vcom -work work -2002 -explicit -stats=none {C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/Memory and writeback/ram.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 2019.2 Compiler 2019.04 Apr 17 2019
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package std_logic_textio
+-- Compiling entity ram2
+-- Compiling architecture syncram of ram2
+** Warning: C:/Users/Eng.Mouhammed-Khier/Desktop/arch/arch/Memory and writeback/ram.vhd(21): (vcom-1194) FILE declaration was written using VHDL 1987 syntax.
+
+} {} {}}

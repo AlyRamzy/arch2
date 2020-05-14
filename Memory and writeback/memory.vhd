@@ -47,7 +47,7 @@ USE IEEE.numeric_std.all;
 
 entity memory is
 port (
-    input: in std_logic_vector(155 downto 0);
+    input: in std_logic_vector(156 downto 0);
     clk: in std_logic;
     output: out std_logic_vector(77 downto 0)
 );
@@ -56,11 +56,12 @@ end entity memory;
 
 architecture bahvioure of memory is
     signal opcode: std_logic_vector(4 downto 0);
-    signal editFlag, LoadPop, swap, RetRti, RTIfirst, secondInterrupt, reset: std_logic;
+    signal editFlag, LoadPop, swap, RetRti, RTIfirst, reset: std_logic;
     signal Reg1, Reg2, Reg3, Reg4: std_logic_vector(31 downto 0);
     signal R1, R2: std_logic_vector(3 downto 0);
     signal selectors: std_logic_vector(3 downto 0);
     signal wb: std_logic_vector(3 downto 0);
+    signal Interrupt: std_logic_vector(1 downto 0);
 
     signal memoryAddress, memoryOutput: std_logic_vector(31 downto 0);
     signal sel: std_logic_vector(1 downto 0);
@@ -69,14 +70,14 @@ architecture bahvioure of memory is
     signal Reg1output, Reg2output: std_logic_vector(31 downto 0);
     
 begin
-    opcode <= input(155 downto 151);
-    reset <= input(150);
-    editFlag <= input(149);
-    loadPop <= input(148);
-    swap <= input(147);
-    RetRti <= input(146);
-    RTIfirst <= input(145);
-    secondInterrupt <= input(144);
+    opcode <= input(156 downto 152);
+    reset <= input(151);
+    editFlag <= input(150);
+    loadPop <= input(149);
+    swap <= input(148);
+    RetRti <= input(147);
+    RTIfirst <= input(146);
+    Interrupt <= input(145 downto 144);
     Reg1 <= input(143 downto 112);
     Reg2 <= input(111 downto 80);
     Reg3 <= input(79 downto 48);
@@ -89,8 +90,8 @@ begin
     sel <= reset & selectors(3);
     MJ: entity work.mux4 port map (Reg2, "00000000000000000000000000000010", "00000000000000000000000000000000", "00000000000000000000000000000000", sel, memoryAddress);
 
-    load <= 1 when opcode = "10001" or opcode = "10011" or opcode = "11011" or opcode = "11100"; --pop load ret rti
-    memory: entity work.ram port map (clk, wb(3), load, memoryAddress, Reg1, memoryOutput);
+    load <= '1' when opcode = "10001" or opcode = "10011" or opcode = "11011" or opcode = "11100"; --pop load ret rti
+    memory: entity work.ram2 port map (clk, wb(3), load, memoryAddress, Reg1, memoryOutput);
 
     MH: entity work.mux4 port map (Reg1, memoryOutput, Reg4, "00000000000000000000000000000000", selectors(2 downto 1), Reg1output);
 
