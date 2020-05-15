@@ -33,6 +33,7 @@ port(
 	output : out std_logic_vector(31 downto 0);
 	--- carry->2 negative->1 zero->0
 	flags : out std_logic_vector(2 downto 0));
+	--temp2: out unsigned(31 downto 0));
 end component;
 
 	----alu signals
@@ -43,6 +44,7 @@ end component;
 	signal alu_output : std_logic_vector(31 downto 0);
 	--- carry->2 negative->1 zero->0
 	signal alu_flags : std_logic_vector(2 downto 0);
+	signal temp2:unsigned (31 downto 0);
 
 	---- forwarding unit selectors
 	signal reg_1_forwarding_selector : std_logic :='0';
@@ -73,6 +75,7 @@ begin
 	alu_in_2<=reg_2_forwarding_out;
 	alu_opcode<=opcode;
 	alu_inturrupt<=inturrupt;
+
 	----M1 forwarding for reg 1
 	reg_1_forwarding_out <=in_reg_1  when (reg_1_forwarding_selector='0') else
          reg_1_forwarding_in ;
@@ -91,11 +94,13 @@ begin
 
 	----edit flag mux
 	edit_flag_mux_out <=    --- instruction edit in carry flag
-				 flag_forwarding_out(31 downto 3)&alu_flags(2)&flag_forwarding_out(1 downto 0) when (edit_flag='1' and (opcode="01110" or opcode="01111") ) else   
+				 flag_forwarding_out(31 downto 3)&alu_flags(2)&flag_forwarding_out(1 downto 0) when (edit_flag='1' and (opcode="01110" or opcode="01111") and alu_in_2/="00000000000000000000000000000000" ) else 
+				---flag_forwarding_out when (edit_flag='1' and (opcode="01110" or opcode="01111") and alu_in_2 ="00000000000000000000000000000000" ) else   
 				--- instruction edit in negative and zero flag
 				flag_forwarding_out(31 downto 2)&alu_flags(1 downto 0) when (edit_flag='1' and (opcode="00001" or opcode="00010" or opcode="00011" or opcode="01001" or opcode="01010" or opcode="01011" or opcode="01100" or opcode="01101") ) else
                                 flag_forwarding_out;
 
+	--edit_flag_mux_out<="00000000000000000000000000000010";
 
 
 	----ME by selector e

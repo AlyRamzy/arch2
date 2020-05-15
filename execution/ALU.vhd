@@ -12,7 +12,11 @@ port(
 	in_2 : in std_logic_vector(31 downto 0);
 	output : out std_logic_vector(31 downto 0);
 	--- carry->2 negative->1 zero->0
-	flags : out std_logic_vector(2 downto 0));
+	flags : out std_logic_vector(2 downto 0);
+	temp:out integer );
+	--temp2: out unsigned(31 downto 0));
+	
+ 	
 end ALU;
 
 
@@ -20,6 +24,7 @@ architecture ALU_arch of ALU is
 	constant one : std_logic_vector(31 downto 0) :="00000000000000000000000000000001" ;
 	
 	signal out_temp :  std_logic_vector(31 downto 0);
+	--signal temp :unsigned(31 downto 0);
 
 begin 
 
@@ -52,9 +57,11 @@ begin
 	flags(1)<=  '1' when (out_temp(31)='1') else
          		'0' ;
 
+	temp<=32-to_integer(unsigned(in_2));
+	--temp2<=unsigned(in_2);
 	----carry flag 
-	flags(2)<=  in_1(32-to_integer(unsigned(in_2))) when (opcode="01110") else
-			in_1(to_integer(unsigned(in_2))-1) when (opcode="01111") else
-			'0';
+	flags(2)<=   in_1(32-to_integer(unsigned(in_2)))when (opcode="01110" and to_integer(unsigned(in_2))<33 and  to_integer(unsigned(in_2)) /=0) else
+			in_1(to_integer(unsigned(in_2))-1) when (opcode="01111" and to_integer(unsigned(in_2))>0 and to_integer(unsigned(in_2))<33) else
+			 '0';
 
 end ALU_arch;
