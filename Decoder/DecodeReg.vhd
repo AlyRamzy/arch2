@@ -20,7 +20,7 @@ begin
 
 if falling_edge(clk)then 
 if  (reset = '1') then q <= (OTHERS => '0');
-elsif (set ='1') then q <= (OTHERS => '1');
+elsif (set ='1') then q <="111111111110";
 elsif  enable = '1' then q <= d;
 end if ;
 end if;

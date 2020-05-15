@@ -15,7 +15,7 @@ ENTITY ram2 IS
 END ENTITY ram2;
 
 ARCHITECTURE syncram OF ram2 IS
-	TYPE ram_type IS ARRAY(0 TO 4095) OF std_logic_vector(31 DOWNTO 0);
+	TYPE ram_type IS ARRAY(0 TO 4095) OF std_logic_vector(15 DOWNTO 0);
 	
 	impure function InitRamFromFile (RamFileName : in string) return ram_type is
 		FILE RamFile : text is in RamFileName;
@@ -35,9 +35,11 @@ ARCHITECTURE syncram OF ram2 IS
 			BEGIN
 				IF rising_edge(clk) THEN  
 					IF wr = '1' THEN
-						ram(to_integer(unsigned(address))) <= datain;
+						ram(to_integer(unsigned(address))) <= datain(31 downto 16);
+						ram(to_integer(unsigned(address))+1) <= datain(15 downto 0);
 					END IF;
 				END IF;
 		END PROCESS;
-		dataout <= ram(to_integer(unsigned(address))) when (rd = '1') ;
+		dataout(31 downto 16) <= ram(to_integer(unsigned(address))) when (rd = '1') ;
+		dataout(15 downto 0) <= ram(to_integer(unsigned(address))+1) when (rd = '1') ;
 END syncram;

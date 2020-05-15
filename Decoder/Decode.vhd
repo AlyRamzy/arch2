@@ -49,7 +49,7 @@ port(	CLK: in std_logic ;
 	R5_RegFile :out std_logic_vector(31 downto 0 );
 	R6_RegFile :out std_logic_vector(31 downto 0 );
 	R7_RegFile :out std_logic_vector(31 downto 0 );
-	SP_RegFile :out std_logic_vector(10 downto 0 );
+	SP_RegFile :out std_logic_vector(11 downto 0 );
 	Flag_RegFile :out std_logic_vector(3 downto 0 )
 	);
 END entity ;
@@ -58,7 +58,7 @@ architecture decodeArch of decode is
 
 
 signal R0_DATA , R1_DATA , R2_DATA , R3_DATA , R4_DATA , R5_DATA , R6_DATA , R7_DATA: std_logic_vector (31 downto 0);
-signal SP_DATA :std_logic_vector (10 downto 0 );
+signal SP_DATA :std_logic_vector (11 downto 0 );
 signal R0_Input,R1_Input,R2_Input,R3_Input,R4_Input,R5_Input,R6_Input,R7_Input,SP_Input : std_logic_vector(31 downto 0 );
 signal R0_Enable,R1_Enable,R2_Enable,R3_Enable,R4_Enable,R5_Enable,R6_Enable,R7_Enable,SP_Enable,flag_Enable: std_logic;
 signal R0_check1,R0_check2,R1_check1,R1_check2,R2_check1,R2_check2,R3_check1,R3_check2,R4_check1,R4_check2,R5_check1,R5_check2,R6_check1,R6_check2,R7_check1,R7_check2,SP_Check1,SP_Check2,flag_Check1,flag_Check2 :std_logic ;
@@ -176,11 +176,11 @@ process (opcode,FetchStatus,Interrupt)
 					 w1 <= '1';
 				when "1001100"  =>--LDD 
                      d0 <= '1';
-					 h0 <= '1';
+					 h1 <= '1';
 					 
                 when "1001101" =>--LDD Sec
                    d0 <= '1';
-				   h0 <= '1';
+				   h1 <= '1';
 				   w1 <= '1';
 				when "1010000" =>--STD
                     d0 <= '1';
@@ -264,7 +264,7 @@ process (opcode,FetchStatus,Interrupt)
 					w2 <= '1';
 				when "1000100"  =>--POP
                      g1 <= '1';
-					 h0 <= '1';
+					 h1 <= '1';
 					 w1 <= '1';
 					 w2 <= '1';
                 when "1100000" =>--JZ
@@ -273,7 +273,7 @@ process (opcode,FetchStatus,Interrupt)
                    
 				 when "1101000"  => --CALL
                      c1 <= '1';
-					 h1 <= '1';
+					 h0 <= '1';
 					 i  <= '1';
 					 k  <= '1';
 					 w0 <= '1';
@@ -288,7 +288,7 @@ process (opcode,FetchStatus,Interrupt)
 					a1 <= '1';
 					a0 <= '1';
                     g1 <= '1';
-					h0 <= '1';
+					h1 <= '1';
 					w2 <= '1';
 					w1 <= '1';
 				
@@ -308,7 +308,7 @@ process (opcode,FetchStatus,Interrupt)
 					 InterruptStatus <= "10";
 					 a1 <= '1';
 					 c1 <= '1';
-					 h0 <= '1';
+					 h1 <= '1';
 					 i  <= '1';
 					 j  <= '1';
 					 w2 <= '1';
@@ -426,7 +426,7 @@ WITH SelectorInputRegFile2 SELECT
 	R5_DATA WHEN "0101",
 	R6_DATA WHEN "0110",
 	R7_DATA WHEN "0111",
-	"000000000000000000000" & SP_DATA WHEN "1000",
+	"00000000000000000000" & SP_DATA WHEN "1000",
 	(others => 'Z') WHEN others;
 WITH Instruction(26 downto 24 ) SELECT 
 	InputRegFile1 <= R0_DATA WHEN "000",
@@ -585,7 +585,7 @@ rr4 : entity work.Reg(regarc) generic map(32)  port map ( clk , rst,'0' , R4_Ena
 rr5 : entity work.Reg(regarc) generic map(32)  port map ( clk , rst,'0' , R5_Enable, R5_Input,R5_DATA) ;
 rr6 : entity work.Reg(regarc) generic map(32)  port map ( clk , rst,'0' , R6_Enable, R6_Input,R6_DATA) ;
 rr7 : entity work.Reg(regarc) generic map(32)  port map ( clk , rst,'0' , R7_Enable, R7_Input,R7_DATA) ;
-sp : entity work.Reg(regarc) generic map(11)  port map ( clk , '0',rst , SP_Enable, SP_Input(10 downto 0),SP_DATA(10 downto 0 )) ;
+sp : entity work.Reg(regarc) generic map(12)  port map ( clk , '0',rst , SP_Enable, SP_Input(11 downto 0),SP_DATA(11 downto 0 )) ;
 flag : entity work.Reg(regarc) generic map(4)  port map ( clk , rst,'0' , flag_Enable, flag_Input ,flag_DATA) ;
 
 		

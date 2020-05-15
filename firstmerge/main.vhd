@@ -9,7 +9,7 @@ port(
     inport: in std_logic_vector(31 downto 0);
     outport: out std_logic_vector(31 downto 0);
     R0_RegFile, R1_RegFile, R2_RegFile, R3_RegFile, R4_RegFile, R5_RegFile, R6_RegFile, R7_RegFile :out std_logic_vector(31 downto 0 );
-	SP_RegFile :out std_logic_vector(10 downto 0 );
+	SP_RegFile :out std_logic_vector(11 downto 0 );
 	Flag_RegFile :out std_logic_vector(3 downto 0 )
 );
 end entity;

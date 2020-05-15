@@ -84,18 +84,18 @@ begin
     Reg4 <= input(47 downto 16);
     R1 <= input(15 downto 12);
     R2 <= input(11 downto 8);
-    selectors<= input(7 downto 4);      --j h0 h1 i
+    selectors<= input(7 downto 4);      --h1 h0 i j
     WB <= input(3 downto 0);
 
-    sel <= reset & selectors(3);
+    sel <= reset & selectors(0);
     MJ: entity work.mux4 port map (Reg2, "00000000000000000000000000000010", "00000000000000000000000000000000", "00000000000000000000000000000000", sel, memoryAddress);
 
     load <= '1' when opcode = "10001" or opcode = "10011" or opcode = "11011" or opcode = "11100"; --pop load ret rti
     memory: entity work.ram2 port map (clk, wb(3), load, memoryAddress, Reg1, memoryOutput);
 
-    MH: entity work.mux4 port map (Reg1, memoryOutput, Reg4, "00000000000000000000000000000000", selectors(2 downto 1), Reg1output);
+    MH: entity work.mux4 port map (Reg1, Reg4, memoryOutput, "00000000000000000000000000000000", selectors(3 downto 2), Reg1output);
 
-    MI: entity work.mux2 port map (Reg2, Reg3, selectors(0), Reg2output);
+    MI: entity work.mux2 port map (Reg2, Reg3, selectors(1), Reg2output);
 
     output <= editFlag & swap & Reg1output & Reg2output & R1 & R2 & wb;
 
