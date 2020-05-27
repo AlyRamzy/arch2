@@ -269,6 +269,7 @@ process (opcode,FetchStatus,Interrupt)
 					 w2 <= '1';
                 when "1100000" =>--JZ
                     d1 <= '1';
+					b1 <= '1';
 				when "1100100" =>--JMP  All zeros 
                    
 				 when "1101000"  => --CALL
@@ -311,9 +312,11 @@ process (opcode,FetchStatus,Interrupt)
 					 h1 <= '1';
 					 i  <= '1';
 					 j  <= '1';
-					 w2 <= '1';
+					 --w2 <= '1';  Commented Because it shouldnt write back
 				when "110" =>--INT Third 
 					InterruptStatus <= "11";
+					a1 <= '1';
+					a0 <= '1';
 					f1 <= '1';
 					f0 <= '1';
 					i  <= '1';
