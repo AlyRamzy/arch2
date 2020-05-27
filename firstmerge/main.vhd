@@ -42,6 +42,17 @@ signal Q2: std_logic_vector(140 downto 0);
 signal Q3: std_logic_vector(156 downto 0);
 signal Q4: std_logic_vector(77 downto 0);
 
+
+---- forwarding unit in
+signal	reg_1_forwarding_in :  std_logic_vector(31 downto 0);
+signal	reg_2_forwarding_in : std_logic_vector(31 downto 0);
+signal	flag_forwarding_in :  std_logic_vector(31 downto 0);
+
+	---- forwarding unit selectors
+signal	reg_1_forwarding_selector : std_logic :='0';
+signal	reg_2_forwarding_selector : std_logic :='0';
+signal	flag_forwarding_selector : std_logic:='0';
+
 begin
     
     fetchStage: entity work.fetch port map (clk, reset, interrupt, instruction, pc, output_state, swap, wb, perdiction_result);
@@ -56,7 +67,11 @@ begin
     stage2: entity work.reg2 generic map(141) port map (clk, reset, '0', R2, D2, Q2);
 
 
-    executeStage: entity work.execute port map (Q2(17 downto 13), Q2(12 downto 4), Q2(129 downto 98), Q2(97 downto 66), Q2(65 downto 34), Q2(134), Q2(131 downto 130), D3(143 downto 112), D3(111 downto 80), D3(79 downto 48), D3(47 downto 16), D3(7 downto 4));
+    
+    executeStage: entity work.execute port map (reg_1_forwarding_in,reg_2_forwarding_in,flag_forwarding_in,reg_1_forwarding_selector,
+reg_2_forwarding_selector,flag_forwarding_selector,Q2(17 downto 13), Q2(12 downto 4), Q2(129 downto 98), Q2(97 downto 66),
+ Q2(65 downto 34), Q2(134), Q2(131 downto 130), D3(143 downto 112), D3(111 downto 80), D3(79 downto 48), D3(47 downto 16),
+ D3(7 downto 4),outport);
 
     D3(156 downto 144) <= Q2(17 downto 13) & reset & Q2(134) & Q2(139) & Q2(140) & Q2(133) & Q2(132) & Q2(131 downto 130);
     D3(15 downto 8) <= Q2(33 downto 30) & Q2(29 downto 26);
