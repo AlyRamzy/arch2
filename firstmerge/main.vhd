@@ -35,12 +35,12 @@ signal R1,R2,R3,R4: std_logic := '1';
 signal D1: std_logic_vector(69 downto 0);
 signal D2: std_logic_vector(140 downto 0);
 signal D3: std_logic_vector(156 downto 0);
-signal D4: std_logic_vector(77 downto 0);
+signal D4: std_logic_vector(84 downto 0);
 
 signal Q1: std_logic_vector(69 downto 0);
 signal Q2: std_logic_vector(140 downto 0);
 signal Q3: std_logic_vector(156 downto 0);
-signal Q4: std_logic_vector(77 downto 0);
+signal Q4: std_logic_vector(84 downto 0);
 
 
 ---- forwarding unit in
@@ -61,17 +61,26 @@ begin
     stage1: entity work.reg2 generic map(70) port map (clk, reset, '0', R1, D1, Q1);
 
 
-    decodeStage: entity work.decode port map (clk, reset, Q1(68), Q1(67), Q1(66), Q1(65 downto 64), Q1(63 downto 32), Q1(31 downto 0), Q1(69), inport, RegWBData0, RegWBData1, RegIndex0, RegIndex1, WBEnable0, WBEnable1, D2(140), D2(139), D2(138 downto 137), D2(136), D2(135), D2(134), D2(133), D2(132), D2(131 downto 130), D2(129 downto 98), D2(97 downto 66), D2(65 downto 34), D2(33 downto 30), D2(29 downto 26), D2(25 downto 22), D2(21 downto 18), D2(17 downto 13), D2(12 downto 4), D2(3 downto 0), R0_RegFile, R1_RegFile, R2_RegFile, R3_RegFile, R4_RegFile, R5_RegFile, R6_RegFile, R7_RegFile, SP_RegFile, Flag_RegFile);
+    decodeStage: entity work.decode port map (clk, reset, Q1(68), Q1(67), Q1(66), Q1(65 downto 64), Q1(63 downto 32),
+ Q1(31 downto 0), Q1(69), inport, RegWBData0, RegWBData1, RegIndex0, RegIndex1, WBEnable0, WBEnable1, D2(140), D2(139),
+ D2(138 downto 137), D2(136), D2(135), D2(134), D2(133), D2(132), D2(131 downto 130), D2(129 downto 98), D2(97 downto 66),
+ D2(65 downto 34), D2(33 downto 30), D2(29 downto 26), D2(25 downto 22), D2(21 downto 18), D2(17 downto 13), D2(12 downto 4),
+ D2(3 downto 0), R0_RegFile, R1_RegFile, R2_RegFile, R3_RegFile, R4_RegFile, R5_RegFile, R6_RegFile, R7_RegFile, SP_RegFile,
+ Flag_RegFile);
 
 
     stage2: entity work.reg2 generic map(141) port map (clk, reset, '0', R2, D2, Q2);
 
-
+    ---forwarding: entity work.forwarding port map(Q2(33 downto 30),Q2(29 downto 26),Q2(25 downto 22),Q2(21 downto 18),Q2(17 downto 13),
+    ---Q2(131 downto 130),Q2(3 downto 0),Q3(15 downto 12),Q3(11 downto 8),Q3(143 downto 112),Q3(111 downto 80),Q3(79 downto 48),Q3(47 downto 16),
+    ---Q3(156 downto 152),Q3(145 downto 144),Q3(3 downto 0),Q4(11 downto 8),Q4(7 downto 4),Q4(75 downto 44),Q4(43 downto 12),
+    ---Q4(82 downto 78),Q4(84 downto 83),Q4(3 downto 0),reg_1_forwarding_in,reg_2_forwarding_in,flag_forwarding_in,
+    --reg_1_forwarding_selector,reg_2_forwarding_selector,flag_forwarding_selector);
     
     executeStage: entity work.execute port map (reg_1_forwarding_in,reg_2_forwarding_in,flag_forwarding_in,reg_1_forwarding_selector,
-reg_2_forwarding_selector,flag_forwarding_selector,Q2(17 downto 13), Q2(12 downto 4), Q2(129 downto 98), Q2(97 downto 66),
- Q2(65 downto 34), Q2(134), Q2(131 downto 130), D3(143 downto 112), D3(111 downto 80), D3(79 downto 48), D3(47 downto 16),
- D3(7 downto 4),outport);
+	reg_2_forwarding_selector,flag_forwarding_selector,Q2(17 downto 13), Q2(12 downto 4), Q2(129 downto 98), Q2(97 downto 66),
+	 Q2(65 downto 34), Q2(134), Q2(131 downto 130), D3(143 downto 112), D3(111 downto 80), D3(79 downto 48), D3(47 downto 16),
+	 D3(7 downto 4),outport);
 
     D3(156 downto 144) <= Q2(17 downto 13) & reset & Q2(134) & Q2(139) & Q2(140) & Q2(133) & Q2(132) & Q2(131 downto 130);
     D3(15 downto 8) <= Q2(33 downto 30) & Q2(29 downto 26);
@@ -79,10 +88,12 @@ reg_2_forwarding_selector,flag_forwarding_selector,Q2(17 downto 13), Q2(12 downt
 
     satge3: entity work.reg2 generic map(157) port map (clk, reset, '0', R3, D3, Q3);
 
-    memoryStage: entity work.memory port map (Q3, clk, D4);
+    memoryStage: entity work.memory port map (Q3, clk, D4(77 downto 0));
+    D4(82 downto 78)<=Q3(156 downto 152);--to pass opcode
+    D4(84 downto 83)<=Q3(145 downto 144);--to pass inturrupt signals
 
-    satge4: entity work.reg2 generic map(78) port map (clk, reset, '0', R3, D4, Q4);
+    satge4: entity work.reg2 generic map(85) port map (clk, reset, '0', R3, D4, Q4);
 
-    writeBackStage: entity work.writeBack port map (Q4, RegWBData0, RegWBData1, RegIndex0, RegIndex1, WBEnable0, WBEnable1);
+    writeBackStage: entity work.writeBack port map (Q4(77 downto 0), RegWBData0, RegWBData1, RegIndex0, RegIndex1, WBEnable0, WBEnable1);
 
 end;
