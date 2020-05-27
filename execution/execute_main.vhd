@@ -5,6 +5,17 @@ use ieee.std_logic_arith.all;
 
 entity execute is
 port(
+	---- forwarding unit in
+	reg_1_forwarding_in : in std_logic_vector(31 downto 0);
+	reg_2_forwarding_in : in std_logic_vector(31 downto 0);
+	flag_forwarding_in : in std_logic_vector(31 downto 0);
+
+	---- forwarding unit selectors
+	reg_1_forwarding_selector :in std_logic ;
+	reg_2_forwarding_selector :in std_logic;
+	flag_forwarding_selector :in std_logic;
+	
+
 	opcode : in std_logic_vector(4 downto 0);
 	--- e->8 ff->76 gg->54 hh->32 i->1 j->0 
 	in_selectors : in std_logic_vector(8 downto 0);
@@ -18,13 +29,16 @@ port(
 	out_reg_2 : out std_logic_vector(31 downto 0);
 	out_reg_3 : out std_logic_vector(31 downto 0);
 	out_reg_4 : out std_logic_vector(31 downto 0);
-	out_selectors :out std_logic_vector(3 downto 0));
+	out_selectors :out std_logic_vector(3 downto 0);
+	out_port:out std_logic_vector(31 downto 0));
+
 
 end execute;
 
 architecture execute_arch of execute is
 component ALU 
 port(
+	
 	---no inturrupt>00  first>01  second>10 third>11
 	inturrupt :in std_logic_vector(1 downto 0);
 	opcode : in std_logic_vector(4 downto 0);
@@ -46,16 +60,7 @@ end component;
 	signal alu_flags : std_logic_vector(2 downto 0);
 	signal temp2:unsigned (31 downto 0);
 
-	---- forwarding unit selectors
-	signal reg_1_forwarding_selector : std_logic :='0';
-	signal reg_2_forwarding_selector : std_logic:='0';
-	signal flag_forwarding_selector : std_logic:='0';
 	
-	---- forwarding unit in
-	signal reg_1_forwarding_in : std_logic_vector(31 downto 0);
-	signal reg_2_forwarding_in : std_logic_vector(31 downto 0);
-	signal flag_forwarding_in : std_logic_vector(31 downto 0);
-
 	---- forwarding unit out
 	signal reg_1_forwarding_out : std_logic_vector(31 downto 0);
 	signal reg_2_forwarding_out : std_logic_vector(31 downto 0);
@@ -75,6 +80,11 @@ begin
 	alu_in_2<=reg_2_forwarding_out;
 	alu_opcode<=opcode;
 	alu_inturrupt<=inturrupt;
+
+
+	-----assign output port----
+	out_port <=reg_1_forwarding_out  when (opcode="00100") else
+         "00000000000000000000000000000000"  ;
 
 	----M1 forwarding for reg 1
 	reg_1_forwarding_out <=in_reg_1  when (reg_1_forwarding_selector='0') else
