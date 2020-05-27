@@ -447,8 +447,8 @@ WITH k SELECT
 	(others => 'Z') WHEN others;
 R1 <= r1signal;
 R2 <= r2signal;
-r3signal <= "ZZZZ";
-r4signal <= "ZZZZ";
+r3signal <= '0' & Instruction(26 downto 24 ) ;
+r4signal <= '0' & Instruction(23 downto 21 ) ;
 R3 <= r3signal;
 R4 <= r4signal;
 
