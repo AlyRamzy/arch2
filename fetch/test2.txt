@@ -13,6 +13,8 @@ force -freeze sim:/fetch/clk 0 0, 1 {50 ps} -r 100
 force -freeze sim:/fetch/rst 1 0
 force -freeze sim:/fetch/int 0 0
 run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Instance: /fetch
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by: pc  Hostname: DESKTOP-LKI1DAP  ProcessID: 1080
 #           Attempting to use alternate WLF file "./wlft3jenwm".
@@ -23,21 +25,19 @@ run
 # ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 #    Time: 0 ps  Iteration: 0  Instance: /fetch
 force -freeze sim:/fetch/rst 0 0
+force -freeze sim:/fetch/out_reg 00000000000000000000000000000000 0
+force -freeze sim:/fetch/out_mem 00000000000000000000000000000001 0
+force -freeze sim:/fetch/int_2nd 0 0
+force -freeze sim:/fetch/rti_1st 0 0
+force -freeze sim:/fetch/ret 0 0
+force -freeze sim:/fetch/call 0 0
+force -freeze sim:/fetch/jmp 0 0
+force -freeze sim:/fetch/jz 0 0
+force -freeze sim:/fetch/zero_flag 0 0
 run
 run
 run
 run
 run
-force -freeze sim:/fetch/int 1 0
-run
-run
-force -freeze sim:/fetch/int 0 0
-run
-run
-run
-run
-run
-run
-run
-run
+force -freeze sim:/fetch/rti_1st 1 0
 run
