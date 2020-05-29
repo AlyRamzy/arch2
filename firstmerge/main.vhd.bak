@@ -70,7 +70,7 @@ begin
     fetchStage: entity work.fetch port map (clk, reset, interrupt, instruction, pc, output_state, swap, wb, perdiction_result, outReg, memoryOut, secondInterrupt, RTIfirstForFetch, RETForFetch, Call, Jmp, Jz, Zeroflage, disable, reset_D, reset_F, reset_E);
     D1 <= interrupt & swap & wb & perdiction_result & output_state & instruction & pc;
 
-    resetStage1 <= reset or reset_F;
+    resetStage1 <= reset or reset_F
     stage1: entity work.reg2 generic map(70) port map (clk, resetStage1, '0', notDisable, D1, Q1);
 
 

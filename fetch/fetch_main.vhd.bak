@@ -5,16 +5,15 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 entity fetch is
     port ( 
             clk, rst, int: in std_logic;
-            instruction: out std_logic_vector (31 downto 0);
+            instruction, pcOutput: out std_logic_vector (31 downto 0);
             output_state : out std_logic_vector(1 downto 0);
-            swap, wb, perdiction_result : out std_logic);
+            swap, wb, perdiction_result : out std_logic;
             out_reg: in std_logic_vector (31 downto 0);
             out_mem: in std_logic_vector (31 downto 0);
             int_2nd, rti_1st, ret: in std_logic;
             call, jmp, jz, zero_flag: in std_logic;
-            reset_D, reset_F, reset_E : out std_logic;
-
-
+            disablePC: in std_logic;
+            reset_D, reset_F, reset_E : out std_logic);
     end entity;
 
 
@@ -76,7 +75,7 @@ Architecture behavioral of fetch is
                          pc <= out_mem; reset_D <=  reset_D_M; reset_F <= reset_F_M; 
                        elsif pc_from_reg = '1' then
                          pc <= out_reg; reset_D <=  reset_D_E; reset_F <= reset_F_E; 
-                       elsif (s0 = '0') and (halt ='0')  then pc <=  pc + '1' ; end if;  
+                       elsif (disablePC = '0') and (s0 = '0') and (halt ='0')  then pc <=  pc + '1' ; end if;  
                        --if s1= '0' then inst(31 downto 16) <= opt; inst(15 downto 0) <= (others => '0');
                         --else inst(15 downto 0) <= opt; end if;
              
@@ -106,5 +105,6 @@ Architecture behavioral of fetch is
             inst(15 downto 0) <= opt when s1 = '1' else (others => '0');
             instruction <= inst;  
             temp1 <= inst(31 downto 16);
+	    pcOutput <= pc + '1';
 
 end Architecture;

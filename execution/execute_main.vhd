@@ -30,7 +30,13 @@ port(
 	out_reg_3 : out std_logic_vector(31 downto 0);
 	out_reg_4 : out std_logic_vector(31 downto 0);
 	out_selectors :out std_logic_vector(3 downto 0);
-	out_port:out std_logic_vector(31 downto 0));
+	out_port:out std_logic_vector(31 downto 0);
+	
+	-- for execute flush
+	Jz, Jmp, Call, Zeroflage: out std_logic
+	);
+
+
 
 
 end execute;
@@ -130,7 +136,16 @@ begin
 			reg_2_forwarding_out when (in_selectors(7 downto 6)="10") else
          		edit_flag_mux_out ;
 
-	
+	Jz <= '1' when opcode = "11000" else
+			'0';
+
+	Jmp <= '1' when opcode = "11001" else
+			'0';
+
+	Call <= '1' when opcode = "11010" else
+			'0';
+
+	Zeroflage <= alu_flags(0);
 
 end execute_arch;
 

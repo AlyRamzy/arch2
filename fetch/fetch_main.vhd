@@ -12,6 +12,7 @@ entity fetch is
             out_mem: in std_logic_vector (31 downto 0);
             int_2nd, rti_1st, ret: in std_logic;
             call, jmp, jz, zero_flag: in std_logic;
+            disablePC: in std_logic;
             reset_D, reset_F, reset_E : out std_logic);
     end entity;
 
@@ -74,7 +75,7 @@ Architecture behavioral of fetch is
                          pc <= out_mem; reset_D <=  reset_D_M; reset_F <= reset_F_M; 
                        elsif pc_from_reg = '1' then
                          pc <= out_reg; reset_D <=  reset_D_E; reset_F <= reset_F_E; 
-                       elsif (s0 = '0') and (halt ='0')  then pc <=  pc + '1' ; end if;  
+                       elsif (disablePC = '0') and (s0 = '0') and (halt ='0')  then pc <=  pc + '1' ; end if;  
                        --if s1= '0' then inst(31 downto 16) <= opt; inst(15 downto 0) <= (others => '0');
                         --else inst(15 downto 0) <= opt; end if;
              
@@ -93,7 +94,7 @@ Architecture behavioral of fetch is
             wb <= w;
             s0 <= fs_opt (1);
             s1 <= fs_opt (0);
-            halt <= '1' when opt(15 downto 11) = "11111" else '0';
+            halt <= '1' when opt(15 downto 11) = "11111" and s1 = '0' else '0';
             output_state <= fs_opt(3 downto 2);
             process(clk)
             
