@@ -102,7 +102,7 @@ begin
     D3(3 downto 0) <= Q2(3 downto 0);
 
     resetStage3 <= reset or reset_E;
-    satge3: entity work.reg2 generic map(157) port map (clk, resetStage3, '0', R3, D3, Q3);
+    satge3: entity work.reg2 generic map(157) port map (clk, reset, '0', R3, D3, Q3);
 
     memoryStage: entity work.memory port map (Q3, clk, D4(77 downto 0), memoryOut, secondInterrupt, RTIfirstForFetch, RETForFetch);
     D4(82 downto 78)<=Q3(156 downto 152);--to pass opcode

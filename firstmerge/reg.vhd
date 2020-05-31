@@ -18,11 +18,13 @@ begin
 
 process (clk,reset,enable)
 begin
-	if(reset = '1') then q <= (others => '0');
-	elsif rising_edge(clk)then 
+	if rising_edge(clk)then 
 		if (set ='1') then q <= (OTHERS => '1');
 		elsif  enable = '1' then q <= d;
 		end if ;
+	elsif falling_edge(clk) then
+		if reset = '1' then q <= (others => '0');
+		end if;
 	end if;
 end process;
 

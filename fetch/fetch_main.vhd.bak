@@ -61,6 +61,7 @@ Architecture behavioral of fetch is
         signal s0,s1 : std_logic;
         signal halt : std_logic  := '0';
         signal  pc_from_reg, pc_from_mem, reset_D_M, reset_F_M, reset_D_E,reset_F_E : std_logic;
+	signal resetFetchStatus: std_logic;
 
        
 
@@ -72,17 +73,18 @@ Architecture behavioral of fetch is
                 elsif clk'event and clk = '1' then 
                         key <= int;
                        if pc_from_mem = '1' then
-                         pc <= out_mem;  
+                         pc <= out_mem;
                        elsif pc_from_reg = '1' then
                          pc <= out_reg;  
                        elsif (disablePC = '0') and (s0 = '0') and (halt ='0')  then pc <=  pc + '1' ; end if;
                        --if s1= '0' then inst(31 downto 16) <= opt; inst(15 downto 0) <= (others => '0');
                         --else inst(15 downto 0) <= opt; end if;
-             		
+             		reset_D <=  reset_D_E or reset_D_M; reset_F <= reset_F_E or reset_F_M;
                 end if;
             end process;
             
-	    reset_D <=  reset_D_E or reset_D_M; reset_F <= reset_F_E or reset_F_M;
+	    resetFetchStatus <= rst or pc_from_mem or pc_from_reg;
+	    
             a1: ram PORT MAP(clk, '0', '1', pc, inp, opt);
             a2: fetch_decode PORT MAP(key, opt(15 downto 11), int ,sw,w, mrio);
             a3: fetch_status PORT MAP(mrio, clk ,rst, fs_opt);
