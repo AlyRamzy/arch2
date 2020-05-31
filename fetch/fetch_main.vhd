@@ -72,17 +72,17 @@ Architecture behavioral of fetch is
                 elsif clk'event and clk = '1' then 
                         key <= int;
                        if pc_from_mem = '1' then
-                         pc <= out_mem; reset_D <=  reset_D_M; reset_F <= reset_F_M; 
+                         pc <= out_mem;  
                        elsif pc_from_reg = '1' then
-                         pc <= out_reg; reset_D <=  reset_D_E; reset_F <= reset_F_E; 
-                       elsif (disablePC = '0') and (s0 = '0') and (halt ='0')  then pc <=  pc + '1' ; end if;  
+                         pc <= out_reg;  
+                       elsif (disablePC = '0') and (s0 = '0') and (halt ='0')  then pc <=  pc + '1' ; end if;
                        --if s1= '0' then inst(31 downto 16) <= opt; inst(15 downto 0) <= (others => '0');
                         --else inst(15 downto 0) <= opt; end if;
-             
+             		reset_D <=  reset_D_E or reset_D_M; reset_F <= reset_F_E or reset_F_M;
                 end if;
             end process;
             
-
+	    
             a1: ram PORT MAP(clk, '0', '1', pc, inp, opt);
             a2: fetch_decode PORT MAP(key, opt(15 downto 11), int ,sw,w, mrio);
             a3: fetch_status PORT MAP(mrio, clk ,rst, fs_opt);

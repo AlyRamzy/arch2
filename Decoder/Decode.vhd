@@ -50,8 +50,7 @@ port(	CLK: in std_logic ;
 	R6_RegFile :out std_logic_vector(31 downto 0 );
 	R7_RegFile :out std_logic_vector(31 downto 0 );
 	SP_RegFile :out std_logic_vector(11 downto 0 );
-	Flag_RegFile :out std_logic_vector(3 downto 0 );
-	regOut: out std_logic_vector(31 downto 0)
+	Flag_RegFile :out std_logic_vector(3 downto 0 )
 	);
 END entity ;
 
@@ -592,8 +591,6 @@ rr7 : entity work.Reg(regarc) generic map(32)  port map ( clk , rst,'0' , R7_Ena
 sp : entity work.Reg(regarc) generic map(12)  port map ( clk , '0',rst , SP_Enable, SP_Input(11 downto 0),SP_DATA(11 downto 0 ));
 flag : entity work.Reg(regarc) generic map(4)  port map ( clk , rst,'0' , flag_Enable, flag_Input ,flag_DATA);
 
---for fetch execute
-regOut <= InputRegFile1;
 
 end architecture;
 
