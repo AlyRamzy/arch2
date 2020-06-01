@@ -32,10 +32,10 @@ signal WBEnable1:  std_logic;
 -------------------for write back-----------------------
 
 signal R1,R2,R3,R4: std_logic := '1';
-signal D1: std_logic_vector(69 downto 0);
-signal D2: std_logic_vector(140 downto 0);
-signal D3: std_logic_vector(156 downto 0);
-signal D4: std_logic_vector(84 downto 0);
+signal D1, D11: std_logic_vector(69 downto 0);
+signal D2, D22: std_logic_vector(140 downto 0);
+signal D3, D33: std_logic_vector(156 downto 0);
+signal D4, D44: std_logic_vector(84 downto 0);
 
 signal Q1: std_logic_vector(69 downto 0);
 signal Q2: std_logic_vector(140 downto 0);
@@ -71,7 +71,11 @@ begin
     D1 <= interrupt & swap & wb & perdiction_result & output_state & instruction & pc;
 
     resetStage1 <= reset or reset_F;
-    stage1: entity work.reg2 generic map(70) port map (clk, resetStage1, '0', notDisable, D1, Q1);
+    D11 <= (others => '0') 	when resetStage1 = '1' else 
+	   D1			when disable = '0' else
+	   Q1;
+
+    stage1: entity work.reg2 generic map(70) port map (clk, '0', '0', R1, D11, Q1);
 
 
     decodeStage: entity work.decode port map (clk, reset, Q1(68), Q1(67), Q1(66), Q1(65 downto 64), Q1(63 downto 32),
@@ -81,8 +85,12 @@ begin
  D2(3 downto 0), R0_RegFile, R1_RegFile, R2_RegFile, R3_RegFile, R4_RegFile, R5_RegFile, R6_RegFile, R7_RegFile, SP_RegFile,
  Flag_RegFile);
     
-    resetstage2 <= reset or reset_D or disable;
-    stage2: entity work.reg2 generic map(141) port map (clk, resetstage2, '0', R2, D2, Q2);
+    resetstage2 <= reset or reset_D;
+    D22 <= (others => '0') when resetstage2 = '1' else
+		D2 when disable = '0' else
+	   	(others => '0');
+
+    stage2: entity work.reg2 generic map(141) port map (clk, resetstage2, '0', R2, D22, Q2);
     outReg <=   Q2(65 downto 34) when Q2(17 downto 13) = "11010" else
                 Q2(129 downto 98);
 
@@ -102,13 +110,17 @@ begin
     D3(3 downto 0) <= Q2(3 downto 0);
 
     resetStage3 <= reset or reset_E;
-    satge3: entity work.reg2 generic map(157) port map (clk, reset, '0', R3, D3, Q3);
+    D33 <= (others => '0') when resetStage3 = '1' else
+	    D3;
+    satge3: entity work.reg2 generic map(157) port map (clk, '0', '0', R3, D33, Q3);
 
     memoryStage: entity work.memory port map (Q3, clk, D4(77 downto 0), memoryOut, secondInterrupt, RTIfirstForFetch, RETForFetch);
     D4(82 downto 78)<=Q3(156 downto 152);--to pass opcode
     D4(84 downto 83)<=Q3(145 downto 144);--to pass inturrupt signals
 
-    satge4: entity work.reg2 generic map(85) port map (clk, reset, '0', R3, D4, Q4);
+    D44 <= (others => '0') when reset = '1' else 
+	    D4;
+    satge4: entity work.reg2 generic map(85) port map (clk, '0', '0', R3, D44, Q4);
 
     writeBackStage: entity work.writeBack port map (Q4(77 downto 0), RegWBData0, RegWBData1, RegIndex0, RegIndex1, WBEnable0, WBEnable1);
 

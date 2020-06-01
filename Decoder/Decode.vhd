@@ -373,15 +373,15 @@ JZ <=
  '0';
 PredResultOut <= PredResult;
 Nu_Sources <= 
-  "01" when opcode = "01010" else
-  "01" when opcode = "01110" else
-  "01" when opcode = "01111" else
+  "01" when opcode = "01010" and FetchStatus = "01" else
+  "01" when opcode = "01110" and FetchStatus = "01" else
+  "01" when opcode = "01111" and FetchStatus = "01" else
   "01" when opcode = "00001" else
   "01" when opcode = "00010" else
   "01" when opcode = "00011" else
   "01" when opcode = "00100" else
   "01" when opcode = "10000" else
-  "01" when opcode = "10100" else
+  "01" when opcode = "10100" and FetchStatus = "01" else
   "01" when opcode = "11000" else
   "01" when opcode = "11010" else
   "10" when opcode = "01000" else
