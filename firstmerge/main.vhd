@@ -94,11 +94,11 @@ begin
     outReg <=   Q2(65 downto 34) when Q2(17 downto 13) = "11010" else
                 Q2(129 downto 98);
 
-    forwarding: entity work.forwarding port map(Q2(33 downto 30),Q2(29 downto 26),Q2(25 downto 22),Q2(21 downto 18),Q2(17 downto 13),
-    Q2(131 downto 130),Q2(3 downto 0),Q3(15 downto 12),Q3(11 downto 8),Q3(143 downto 112),Q3(111 downto 80),Q3(79 downto 48),Q3(47 downto 16),
-    Q3(156 downto 152),Q3(145 downto 144),Q3(3 downto 0),Q4(11 downto 8),Q4(7 downto 4),Q4(75 downto 44),Q4(43 downto 12),
-    Q4(82 downto 78),Q4(84 downto 83),Q4(3 downto 0),reg_1_forwarding_in,reg_2_forwarding_in,flag_forwarding_in,
-    reg_1_forwarding_selector,reg_2_forwarding_selector,flag_forwarding_selector);
+    --forwarding: entity work.forwarding port map(Q2(33 downto 30),Q2(29 downto 26),Q2(25 downto 22),Q2(21 downto 18),Q2(17 downto 13),
+    --Q2(131 downto 130),Q2(3 downto 0),Q3(15 downto 12),Q3(11 downto 8),Q3(143 downto 112),Q3(111 downto 80),Q3(79 downto 48),Q3(47 downto 16),
+    --Q3(156 downto 152),Q3(145 downto 144),Q3(3 downto 0),Q4(11 downto 8),Q4(7 downto 4),Q4(75 downto 44),Q4(43 downto 12),
+    --Q4(82 downto 78),Q4(84 downto 83),Q4(3 downto 0),reg_1_forwarding_in,reg_2_forwarding_in,flag_forwarding_in,
+    --reg_1_forwarding_selector,reg_2_forwarding_selector,flag_forwarding_selector);
     
     executeStage: entity work.execute port map (reg_1_forwarding_in,reg_2_forwarding_in,flag_forwarding_in,reg_1_forwarding_selector,
 	reg_2_forwarding_selector,flag_forwarding_selector,Q2(17 downto 13), Q2(12 downto 4), Q2(129 downto 98), Q2(97 downto 66),

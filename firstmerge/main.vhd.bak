@@ -34,8 +34,8 @@ signal WBEnable1:  std_logic;
 signal R1,R2,R3,R4: std_logic := '1';
 signal D1, D11: std_logic_vector(69 downto 0);
 signal D2, D22: std_logic_vector(140 downto 0);
-signal D3: std_logic_vector(156 downto 0);
-signal D4: std_logic_vector(84 downto 0);
+signal D3, D33: std_logic_vector(156 downto 0);
+signal D4, D44: std_logic_vector(84 downto 0);
 
 signal Q1: std_logic_vector(69 downto 0);
 signal Q2: std_logic_vector(140 downto 0);

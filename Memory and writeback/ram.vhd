@@ -36,13 +36,13 @@ ARCHITECTURE syncram OF ram2 IS
 			BEGIN
 				IF rising_edge(clk) THEN  
 					IF wr = '1' THEN
-						ram(to_integer(unsigned(address))) <= datain(31 downto 16);
-						ram(to_integer(unsigned(address))+1) <= datain(15 downto 0);
+						ram(to_integer(unsigned(address(11 downto 0)))) <= datain(31 downto 16);
+						ram(to_integer(unsigned(address(11 downto 0)))+1) <= datain(15 downto 0);
 					END IF;
 				END IF;
 		END PROCESS;
-		dataout(31 downto 16) <= ram(to_integer(unsigned(address))) when (rd = '1' and reset = '0') else
+		dataout(31 downto 16) <= ram(to_integer(unsigned(address(11 downto 0)))) when (rd = '1' and reset = '0') else
 					 ram(0);
-		dataout(15 downto 0) <= ram(to_integer(unsigned(address))+1) when (rd = '1' and reset = '0') else
+		dataout(15 downto 0) <= ram(to_integer(unsigned(address(11 downto 0)))+1) when (rd = '1' and reset = '0') else
 					ram(1);
 END syncram;
