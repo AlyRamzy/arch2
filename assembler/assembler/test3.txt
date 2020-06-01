@@ -1,4 +1,14 @@
-INC R1
+LDM R1, 128
+.org 0
+50
+.org 2  ###
+30
+.org 10             ###########    
+
+
+
+
+    INC R1
 INC R2
 INC R3
 NOP
