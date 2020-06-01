@@ -109,11 +109,16 @@ begin
 
 
 	----edit flag mux
-	edit_flag_mux_out <=    --- instruction edit in carry flag
-				 flag_forwarding_out(31 downto 3)&alu_flags(2)&flag_forwarding_out(1 downto 0) when (edit_flag='1' and (opcode="01110" or opcode="01111") and alu_in_2/="00000000000000000000000000000000" ) else 
+	edit_flag_mux_out <=    --- instruction edit in zero negative flag  (logical )
+				 flag_forwarding_out(31 downto 2)& alu_flags(1 downto 0) when (edit_flag='1' and (opcode="00001" or opcode="01100" or opcode="01101")  ) else 
 				---flag_forwarding_out when (edit_flag='1' and (opcode="01110" or opcode="01111") and alu_in_2 ="00000000000000000000000000000000" ) else   
-				--- instruction edit in negative and zero flag
-				flag_forwarding_out(31 downto 2)&alu_flags(1 downto 0) when (edit_flag='1' and (opcode="00001" or opcode="00010" or opcode="00011" or opcode="01001" or opcode="01010" or opcode="01011" or opcode="01100" or opcode="01101") ) else
+				--- instruction edit in negative and zero flag and carry  (arithmatic)
+				flag_forwarding_out(31 downto 3)&alu_flags(2 downto 0) when (edit_flag='1' and (opcode="00010" or opcode="00011" or opcode="01001" or opcode="01010" or opcode="01011") ) else
+				flag_forwarding_out(31 downto 3)&alu_flags(2 downto 0) when (edit_flag='1' and (opcode="01110" or opcode="01111") and alu_in_2/="00000000000000000000000000000000" ) else
+				--for shift el mafrod hena no change carry l2n by shift by zero
+				flag_forwarding_out(31 downto 2)&alu_flags(1 downto 0) when (edit_flag='1' and (opcode="01110" or opcode="01111") and alu_in_2="00000000000000000000000000000000" ) else
+
+
                                 flag_forwarding_out;
 
 	--edit_flag_mux_out<="00000000000000000000000000000010";
