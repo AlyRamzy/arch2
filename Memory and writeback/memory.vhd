@@ -93,8 +93,8 @@ begin
     MJ: entity work.mux4 port map (Reg2, "00000000000000000000000000000010", "00000000000000000000000000000000", "00000000000000000000000000000000", sel, memoryAddress);
 
     load <= '1' when opcode = "10001" or opcode = "10011" or opcode = "11011" or opcode = "11100" else --pop load ret rti
-            '0'; 
-    memory: entity work.ram2 port map (clk, wb(3), load, memoryAddress, Reg1, memoryOutput);
+            '0';
+    memory: entity work.ram2 port map (clk, wb(3), load, reset, memoryAddress, Reg1, memoryOutput);
 
     MH: entity work.mux4 port map (Reg1, Reg4, memoryOutput, "00000000000000000000000000000000", selectors(3 downto 2), Reg1output);
 

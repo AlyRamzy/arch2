@@ -69,7 +69,7 @@ Architecture behavioral of fetch is
             
             process (clk, rst)
             begin
-                if rst = '1' then pc <=  (others => '0'); 
+                if rst = '1' then pc <=  out_mem; 
                 elsif clk'event and clk = '1' then 
                         key <= int;
                        if pc_from_mem = '1' then

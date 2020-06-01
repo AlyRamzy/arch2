@@ -9,7 +9,6 @@ ENTITY ram2 IS
 		clk : IN std_logic;
 		wr  : IN std_logic;
 		rd	: IN std_logic;
-		reset	: IN std_logic;
 		address : IN  std_logic_vector(31 DOWNTO 0);
 		datain  : IN  std_logic_vector(31 DOWNTO 0);
 		dataout : OUT std_logic_vector(31 DOWNTO 0));
@@ -41,8 +40,6 @@ ARCHITECTURE syncram OF ram2 IS
 					END IF;
 				END IF;
 		END PROCESS;
-		dataout(31 downto 16) <= ram(to_integer(unsigned(address))) when (rd = '1' and reset = '0') else
-					 ram(0);
-		dataout(15 downto 0) <= ram(to_integer(unsigned(address))+1) when (rd = '1' and reset = '0') else
-					ram(1);
+		dataout(31 downto 16) <= ram(to_integer(unsigned(address))) when (rd = '1') ;
+		dataout(15 downto 0) <= ram(to_integer(unsigned(address))+1) when (rd = '1') ;
 END syncram;

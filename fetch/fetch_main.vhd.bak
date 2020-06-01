@@ -69,8 +69,8 @@ Architecture behavioral of fetch is
             
             process (clk, rst)
             begin
-                if rst = '1' then pc <=  (others => '0'); 
-                elsif clk'event and clk = '1' then 
+                --if rst = '1' then pc <=  (others => '0'); 
+                if clk'event and clk = '1' then 
                         key <= int;
                        if pc_from_mem = '1' then
                          pc <= out_mem;
@@ -87,7 +87,7 @@ Architecture behavioral of fetch is
 	    
             a1: ram PORT MAP(clk, '0', '1', pc, inp, opt);
             a2: fetch_decode PORT MAP(key, opt(15 downto 11), int ,sw,w, mrio);
-            a3: fetch_status PORT MAP(mrio, clk ,rst, fs_opt);
+            a3: fetch_status PORT MAP(mrio, clk ,resetFetchStatus, fs_opt);
             a4: execute_flush PORT MAP(call, jmp ,jz,zero_flag , pc_from_reg, reset_D_E, reset_F_E);
             a5: memory_flush PORT MAP(int_2nd, rti_1st ,ret,reset_D_M, reset_F_M,reset_E,
              pc_from_mem);
