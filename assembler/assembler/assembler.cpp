@@ -77,7 +77,7 @@ string getOperand(string s) {
 int main()
 {
 	string name;
-	cout << "please enter the filename that you need to assemble with .txt extension and type it with the name" << endl;
+	cout << "please enter the filename that you need to assemble with the extension" << endl;
 	cin >> name;
 	ifstream inFile;
 	inFile.open(name);
@@ -454,7 +454,7 @@ int main()
 
 			line = cleanBefore(line);
 			s = getOperand(line);
-			imm = stoi(s, 0, 16);
+			imm = stoll(s, 0, 16);
 			bitset<16> bImm(imm);
 			part2 = bImm;
 		}
@@ -745,7 +745,7 @@ int main()
 			}
 
 			line = cleanBefore(line);
-			imm = stoi(getOperand(line), 0, 16);
+			imm = stoll(getOperand(line), 0, 16);
 			bitset<16> bImm(imm);
 			part2 = bImm;
 		}
@@ -781,7 +781,7 @@ int main()
 			}
 
 			line = cleanBefore(line);
-			imm = stoi(getOperand(line), 0, 16);
+			imm = stoll(getOperand(line), 0, 16);
 			bitset<16> bImm(imm);
 			part2 = bImm;
 		}
@@ -875,7 +875,7 @@ int main()
 			}
 
 			line = cleanBefore(line);
-			imm = stoi(getOperand(line), 0, 16);
+			imm = stoll(getOperand(line), 0, 16);
 			bitset<16> bImm(imm);
 			part2 = bImm;
 		}
@@ -911,7 +911,7 @@ int main()
 			}
 
 			line = cleanBefore(line);
-			EA = stoi(getOperand(line), 0, 16);
+			EA = stoll(getOperand(line), 0, 16);
 			bitset<20> BinaryEA(EA);
 			for (int i = 7, j = 19; i >= 0; i--, j--) {
 				part1[i] = BinaryEA[j];
@@ -952,7 +952,7 @@ int main()
 			}
 
 			line = cleanBefore(line);
-			EA = stoi(getOperand(line), 0, 16);
+			EA = stoll(getOperand(line), 0, 16);
 			bitset<20> BinaryEA(EA);
 			for (int i = 7, j = 19; i >= 0; i--, j--) {
 				part1[i] = BinaryEA[j];
@@ -1056,10 +1056,10 @@ int main()
 		}
 		else if (s == ".ORG") {
 			line = cleanBefore(line);
-			EA = stoi(getOperand(line), 0, 16);
+			EA = stoll(getOperand(line), 0, 16);
 			if (EA == 0 || EA == 2) {
 				getline(inFile, line);
-				imm = stoi(deleteComment(line), 0, 16);
+				imm = stoll(deleteComment(line), 0, 16);
 				bitset<32> bImm(imm);
 				part1 = getRange(bImm, 16, 32);
 				part2 = getRange(bImm, 0, 16);
@@ -1071,6 +1071,9 @@ int main()
 					l++;
 				}
 			}
+		}
+		else if (s == "HALT") {
+			part1[15] = 1; part1[14] = 1; part1[13] = 1; part1[12] = 1; part1[11] = 1;
 		}
 
 		if (s != ".ORG") {

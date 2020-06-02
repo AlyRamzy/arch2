@@ -1,4 +1,4 @@
 .ORG 2
 100
 .ORG 10
-STD R0, 0
+STD R0, ffffffff

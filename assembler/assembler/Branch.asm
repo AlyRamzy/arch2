@@ -24,6 +24,7 @@ INC R7	  # this statement shouldn't be executed,
 .ORG 30
 AND R1,R5,R5   #R5=0 , Z = 1
             #try interrupt here
+
 JZ  R2      #Jump taken, Z = 0
 INC R7      #this statement shouldn't be executed
 
@@ -45,10 +46,14 @@ rti
 
 #check on load use
 .ORG 200
+pop R0
+ldm R0, 0
 POP R6     #R6=300, SP=7FE
 Call R6    #SP=7FC, M[7FF]=half next PC,M[7FE]=other half next PC
           #try interrupt here
 INC R6	  #R6=401, this statement shouldn't be executed till call returns, C--> 0, N-->0,Z-->0
+pop R0
+ldm R0, 0
 NOP
 NOP
 
@@ -62,3 +67,4 @@ INC R7           #this should not be executed
 .ORG 500
 NOP
 NOP
+halt
