@@ -86,7 +86,7 @@ OpCode_Mem = "01000" or OpCode_Mem = "01011" or OpCode_Mem = "10001") else '0';
 -- not inc dec OpCode_Mem="00001" or OpCode_Mem= "00011" or OpCode_Mem = "00010"
 --and or add sub OpCode_Mem = "01100" or OpCode_Mem = "01101" or OpCode_Mem = "01001" or OpCode_Mem = "01011")
 group2_Mem <= '1' when (OpCode_Mem = "10001" or OpCode_Mem = "01000" or OpCode_Mem ="11011" or 
-(OpCode_Mem = "11100" and WB_Mem = "0110") or OpCode_Mem = "01010" or
+(OpCode_Mem = "11100" and WB_Mem = "0010") or OpCode_Mem = "01010" or
 OpCode_Mem = "01110" or OpCode_Mem = "01111" or 
 OpCode_Mem="00001" or OpCode_Mem= "00011" or OpCode_Mem = "00010"or
 OpCode_Mem = "01100" or OpCode_Mem = "01101" or OpCode_Mem = "01001" or OpCode_Mem = "01011")

@@ -28,7 +28,7 @@ port(	CLK: in std_logic ;
 	PredResultOut : out std_logic ;
 	EditFlag : out std_logic ;
 	RET : out std_logic ;
-	RTI_First : out std_logic ;
+	RTI_Second : out std_logic ;
 	InterruptStatus :out std_logic_vector(1 downto 0) ;
 	Reg1: out std_logic_vector (31 downto 0);
 	Reg2: out std_logic_vector (31 downto 0);
@@ -269,6 +269,8 @@ process (opcode,FetchStatus,Interrupt)
 					 w2 <= '1';
                 when "1100000" =>--JZ
                     d1 <= '1';
+					h0 <= '1';
+					w1 <= '1';
 					b1 <= '1';
 				when "1100100" =>--JMP  All zeros 
                    
@@ -285,13 +287,15 @@ process (opcode,FetchStatus,Interrupt)
 				when "1110000"  =>--RTI 1st 
                      g1 <= '1';
 					 w2 <= '1';
+					 w1 <= '1';
+					 h1 <= '1';
                 when "1110001" => --RTI 2nd
 					a1 <= '1';
 					a0 <= '1';
                     g1 <= '1';
-					h1 <= '1';
 					w2 <= '1';
-					w1 <= '1';
+					--w1 <= '1';
+					
 				
                
 				when others =>
@@ -350,8 +354,8 @@ load_pop <=
 RET <= 
  '1' when opcode = "11011" else 
  '0';
-RTI_First <= 
- '1' when ( opcode = "11100" and FetchStatus = "00") else 
+RTI_Second <= 
+ '1' when ( opcode = "11100" and FetchStatus = "01") else 
  '0';
 
 EditFlag <= 

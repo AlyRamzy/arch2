@@ -89,8 +89,8 @@ begin
 	   	(others => '0');
 
     stage2: entity work.reg2 generic map(141) port map (clk, resetstage2, '0', R2, D22, Q2);
-    outReg <=   Q2(65 downto 34) when Q2(17 downto 13) = "11010" else
-                Q2(129 downto 98);
+    outReg <=   D3(79 downto 48) when Q2(17 downto 13) = "11010" else
+                D3(143 downto 112);
 
     forwarding: entity work.forwarding port map(Q2(33 downto 30),Q2(29 downto 26),Q2(25 downto 22),Q2(21 downto 18),Q2(17 downto 13),
     Q2(131 downto 130),Q2(3 downto 0),Q3(15 downto 12),Q3(11 downto 8),Q3(143 downto 112),Q3(111 downto 80),Q3(79 downto 48),Q3(47 downto 16),
@@ -118,7 +118,7 @@ begin
     
     satge4: entity work.reg2 generic map(85) port map (clk, reset, '0', R3, D4, Q4);
 
-    writeBackStage: entity work.writeBack port map (Q4(77 downto 0), RegWBData0, RegWBData1, RegIndex0, RegIndex1, WBEnable0, WBEnable1);
+    writeBackStage: entity work.writeBack port map (Q4(82 downto 78), Q4(77 downto 0), RegWBData0, RegWBData1, RegIndex0, RegIndex1, WBEnable0, WBEnable1);
 
     hazards: entity work.hazard port map(Q2(33 downto 30), Q2(139), D2(33 downto 30), D2(29 downto 26), D2(138 downto 137), disable);
     notDisable <= not disable;

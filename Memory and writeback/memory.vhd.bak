@@ -51,14 +51,14 @@ port (
     clk: in std_logic;
     output: out std_logic_vector(77 downto 0);
     memOut: out std_logic_vector(31 downto 0);
-    secondInterrupt, RTIfirstForFetch, RETForFetch: out std_logic
+    secondInterrupt, RTIsecondForFetch, RETForFetch: out std_logic
 );
 end entity memory;
 
 
 architecture bahvioure of memory is
     signal opcode: std_logic_vector(4 downto 0);
-    signal editFlag, LoadPop, swap, RetRti, RTIfirst, reset: std_logic;
+    signal editFlag, LoadPop, swap, RetRti, RTIsecond, reset: std_logic;
     signal Reg1, Reg2, Reg3, Reg4: std_logic_vector(31 downto 0);
     signal R1, R2: std_logic_vector(3 downto 0);
     signal selectors: std_logic_vector(3 downto 0);
@@ -70,6 +70,8 @@ architecture bahvioure of memory is
     signal load: std_logic;
 
     signal Reg1output, Reg2output: std_logic_vector(31 downto 0);
+
+   
     
 begin
     opcode <= input(156 downto 152);
@@ -78,7 +80,7 @@ begin
     loadPop <= input(149);
     swap <= input(148);
     RetRti <= input(147);
-    RTIfirst <= input(146);
+    RTIsecond <= input(146);
     Interrupt <= input(145 downto 144);
     Reg1 <= input(143 downto 112);
     Reg2 <= input(111 downto 80);
@@ -91,8 +93,9 @@ begin
 
     sel <= reset & selectors(0);
     MJ: entity work.mux4 port map (Reg2, "00000000000000000000000000000010", "00000000000000000000000000000000", "00000000000000000000000000000000", sel, memoryAddress);
+ 		
 
-    load <= '1' when opcode = "10001" or opcode = "10011" or opcode = "11011" or opcode = "11100" else --pop load ret rti
+    load <= '1' when (opcode = "10001" or opcode = "10011" or opcode = "11011" or opcode = "11100" or Interrupt = "10") and st = '0' else --pop load ret rti
             '0';
     memory: entity work.ram2 port map (clk, wb(3), load, reset, memoryAddress, Reg1, memoryOutput);
 
@@ -105,7 +108,7 @@ begin
     secondInterrupt <=  '1' when Interrupt = "10" else
                         '0';
     
-    RTIfirstForFetch <= RTIfirst;
+    RTIsecondForFetch <= RTIsecond;
 
     RETForFetch <= RetRti;
 

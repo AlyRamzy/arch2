@@ -115,11 +115,10 @@ begin
     D4(82 downto 78)<=Q3(156 downto 152);--to pass opcode
     D4(84 downto 83)<=Q3(145 downto 144);--to pass inturrupt signals
 
-    D44 <= (others => '0') when reset = '1' else 
-	    D4;
-    satge4: entity work.reg2 generic map(85) port map (clk, '0', '0', R3, D44, Q4);
+    
+    satge4: entity work.reg2 generic map(85) port map (clk, reset, '0', R3, D4, Q4);
 
-    writeBackStage: entity work.writeBack port map (Q4(77 downto 0), RegWBData0, RegWBData1, RegIndex0, RegIndex1, WBEnable0, WBEnable1);
+    writeBackStage: entity work.writeBack port map (Q4(82 downto 78), Q4(77 downto 0), RegWBData0, RegWBData1, RegIndex0, RegIndex1, WBEnable0, WBEnable1);
 
     hazards: entity work.hazard port map(Q2(33 downto 30), Q2(139), D2(33 downto 30), D2(29 downto 26), D2(138 downto 137), disable);
     notDisable <= not disable;

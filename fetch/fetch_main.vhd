@@ -105,8 +105,10 @@ Architecture behavioral of fetch is
             end process;
             inst(31 downto 16) <= opt when s1 = '0'else temp2 ;
             inst(15 downto 0) <= opt when s1 = '1' else (others => '0');
-            instruction <= inst;  
+            instruction <= inst when int = '0' else
+				(others => '0');  
             temp1 <= inst(31 downto 16);
-	    pcOutput <= pc + '1';
+	    pcOutput <= pc + '1' when int = '0' else
+			pc - '1';
 
 end Architecture;

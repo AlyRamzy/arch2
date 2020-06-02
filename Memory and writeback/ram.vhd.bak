@@ -34,10 +34,10 @@ ARCHITECTURE syncram OF ram2 IS
 	BEGIN
 		PROCESS(clk) IS
 			BEGIN
-				IF rising_edge(clk) THEN  
+				IF CLK = '1' THEN  
 					IF wr = '1' THEN
 						ram(to_integer(unsigned(address(11 downto 0)))) <= datain(31 downto 16);
-						ram(to_integer(unsigned(address)(11 downto 0))+1) <= datain(15 downto 0);
+						ram(to_integer(unsigned(address(11 downto 0)))+1) <= datain(15 downto 0);
 					END IF;
 				END IF;
 		END PROCESS;
