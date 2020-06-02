@@ -120,6 +120,9 @@ begin
 				flag_forwarding_out(31 downto 2)&alu_flags(1 downto 0) when (edit_flag='1' and (opcode="01110" or opcode="01111") and alu_in_2="00000000000000000000000000000000" ) else
 
 				flag_forwarding_out(31 downto 1)&'0' when (opcode="11000" and flag_forwarding_out(0)='1') else
+				
+
+
                                 flag_forwarding_out;
 
 	--edit_flag_mux_out<="00000000000000000000000000000010";
