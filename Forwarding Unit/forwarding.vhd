@@ -71,7 +71,7 @@ group3_Exec <= '1' when ( OpCode_Exec = "10000" or OpCode_Exec = "10001" or OpCo
 OpCode_Exec = "11011" or OpCode_Exec = "11100" or InterruptStatus_Exec = "01" or InterruptStatus_Exec = "11") else 
 '0';
 
-group4_Exec <= '1' when( OpCode_Exec = "11000") else '0';
+group4_Exec <= '1' when( OpCode_Exec = "11000" or OpCode_Exec = "00001" or OpCode_Exec="01100" or OpCode_Exec="01101" ) else '0';
 
 
 group5_Exec <= '1' when ( OpCode_Exec = "11010" or InterruptStatus_Exec ="11") else '0';
