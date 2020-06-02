@@ -81,7 +81,7 @@ begin
 
 	----assigned without muxes
 	out_reg_3 <=alu_output;
-	out_reg_4 <= edit_flag_mux_out when opcode = "11000" else
+	out_reg_4 <= edit_flag_mux_out when opcode = "11000" or (opcode = "11010" and flag_forwarding_selector = '1') else
 			in_reg_3;
 	out_selectors<=in_selectors(3 downto 0);
 	alu_in_2<=reg_2_forwarding_out;
@@ -119,9 +119,7 @@ begin
 				--for shift el mafrod hena no change carry l2n by shift by zero
 				flag_forwarding_out(31 downto 2)&alu_flags(1 downto 0) when (edit_flag='1' and (opcode="01110" or opcode="01111") and alu_in_2="00000000000000000000000000000000" ) else
 
-				flag_forwarding_out(31 downto 1)&'0' when (opcode="11000" and flag_forwarding_out(0)='1') else
-				
-
+				flag_forwarding_out(31 downto 1)&'0' when (opcode="11000"  and flag_forwarding_out(0)='1') else
 
                                 flag_forwarding_out;
 

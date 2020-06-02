@@ -97,9 +97,7 @@ Architecture behavioral of fetch is
             s0 <= fs_opt (1);
             s1 <= fs_opt (0);
             halt <= '1' when opt(15 downto 11) = "11111" and s1 = '0' else '0';
-            output_state <= "01" when fs_opt(3 downto 2) = "00" and mrio = "10" else
-			    "00" when fs_opt(3 downto 2) = "01" and mrio = "10" else
-			     fs_opt(3 downto 2);
+            output_state <= fs_opt(3 downto 2);
             process(clk)
             
             begin
@@ -111,6 +109,6 @@ Architecture behavioral of fetch is
 				(others => '0');  
             temp1 <= inst(31 downto 16);
 	    pcOutput <= pc + '1' when int = '0' else
-			pc - '1';
+			pc;
 
 end Architecture;
