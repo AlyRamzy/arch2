@@ -1,0 +1,4 @@
+1-run assembler.cpp and enter the file name like(oneop.asm)
+2-the output is instruction.txt and data.txt
+3-instruction.txt is the instruction memory and it should be named memory.txt to be runned by our vhdl code
+4-data.txt should replace the first 4 lines in memory2.txt
